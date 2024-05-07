@@ -21,7 +21,7 @@ type CanvasProps = {
     boardId: string;
 }
 
-const MAX_LAYERS = 100;
+const MAX_LAYERS = 200;
 const SELECTION_NET_THRESHOLD = 5;
 
 const Canvas = ({ boardId }: CanvasProps) => {
