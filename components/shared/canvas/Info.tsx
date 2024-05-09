@@ -14,10 +14,12 @@ import { api } from "@/convex/_generated/api";
 import Link from "next/link";
 import { useRenameModal } from "@/store/useRenameModal";
 import Actions from "../Actions";
-import { Menu } from "lucide-react";
+import { Menu, Moon, Sun } from "lucide-react";
 
 type InfoProps = {
     boardId: string;
+    blackTheme: boolean;
+    setBlackTheme: (value: boolean) => void;
 }
 
 const TabSeparator = () => {
@@ -33,7 +35,7 @@ const font = Poppins({
     weight: ["600"]
 });
 
-const Info = ({ boardId }: InfoProps) => {
+const Info = ({ boardId, setBlackTheme, blackTheme }: InfoProps) => {
 
     const { onOpen } = useRenameModal();
 
@@ -74,6 +76,18 @@ const Info = ({ boardId }: InfoProps) => {
                 </Hint>
             </div>
         </Actions>
+        
+        <Hint label="Toggle Theme" side="bottom" sideOffset={10}>
+            {blackTheme ? (
+            <Button variant="board" className="text-base font-normal px-2" onClick={() => setBlackTheme(false)}>
+                <Sun />
+            </Button>
+            ) : (
+            <Button variant="board" className="text-base font-normal px-2" onClick={() => setBlackTheme(true)}>
+                <Moon />
+            </Button>
+            )}
+        </Hint>
 
     </div>
     )

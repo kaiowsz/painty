@@ -40,6 +40,8 @@ const Canvas = ({ boardId }: CanvasProps) => {
         mode: CanvasMode.None,
     })
 
+    const [blackTheme, setBlackTheme] = useState(false);
+
     const history = useHistory();
     const canUndo = useCanUndo();
     const canRedo = useCanRedo();
@@ -193,15 +195,11 @@ const Canvas = ({ boardId }: CanvasProps) => {
 
     }, [history]);
 
-    const onWheel = useCallback((e: React.WheelEvent) => {
-
-        
+    const onWheel = useCallback((e: React.WheelEvent) => {   
         setCamera((camera) => ({
             x: camera.x - e.deltaX,
             y: camera.y - e.deltaY,
         }))
-
-        console.log(camera.y)
     }, [])
 
     const onPointerDown = useCallback((event: React.PointerEvent) => {
@@ -317,9 +315,12 @@ const Canvas = ({ boardId }: CanvasProps) => {
         }
     }, [history, deleteLayers]);
 
+    // bg-neutral-100;
+    // bg-stone-800;
+
     return (
-    <main className="h-full w-full relative bg-neutral-100 touch-none">
-        <Info boardId={boardId} />
+    <main className={`h-full w-full relative ${blackTheme ? "bg-stone-900" : "bg-neutral-100"} touch-none`}>
+        <Info boardId={boardId} setBlackTheme={setBlackTheme} blackTheme={blackTheme} />
         <Participants />
         <Toolbar canvasState={canvasState} setCanvasState={setCanvasState} canRedo={canRedo} canUndo={canUndo} undo={history.undo} redo={history.redo} />
 
